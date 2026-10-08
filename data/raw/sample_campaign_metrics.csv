@@ -1,0 +1,13 @@
+event_date,platform,campaign_id,campaign_name,impressions,clicks,spend,conversions,revenue
+2026-10-01,google_ads,G001,Search_Brand,120000,4800,6200.50,310,24800.00
+2026-10-01,meta_ads,M001,Prospecting_Video,185000,5550,7400.00,275,22100.00
+2026-10-01,pinterest,P001,Seasonal_Inspiration,96000,2496,3150.00,126,10100.00
+2026-10-01,snapchat,S001,GenZ_Awareness,142000,3266,3825.25,118,8850.00
+2026-10-02,google_ads,G001,Search_Brand,128000,5248,6610.00,342,27360.00
+2026-10-02,meta_ads,M001,Prospecting_Video,192000,5856,7680.00,294,23450.00
+2026-10-02,pinterest,P001,Seasonal_Inspiration,101000,2727,3325.00,139,11120.00
+2026-10-02,snapchat,S001,GenZ_Awareness,149000,3576,4015.00,127,9525.00
+2026-10-03,google_ads,G002,NonBrand_Category,210000,6930,11200.00,355,28400.00
+2026-10-03,meta_ads,M002,Retargeting_Carousel,133000,5985,8150.00,402,33750.00
+2026-10-03,pinterest,P002,Retargeting_Shopping,87000,3045,3600.00,171,13950.00
+2026-10-03,snapchat,S002,Retargeting_Story,99000,3366,3980.00,164,12650.00
