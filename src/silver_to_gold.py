@@ -2,6 +2,7 @@
 
 import argparse
 from pyspark.sql import SparkSession, functions as F
+from src.data_quality import assert_quality
 
 
 def safe_divide(numerator, denominator):
@@ -9,6 +10,8 @@ def safe_divide(numerator, denominator):
 
 
 def build_gold(df):
+    """Reject invalid Silver records before publishing Gold aggregates."""
+    assert_quality(df)
     aggregated = (
         df.groupBy("platform", "campaign_id", "campaign_name")
         .agg(
