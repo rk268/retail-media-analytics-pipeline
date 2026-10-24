@@ -1,0 +1,3 @@
+date,campaign_id,campaign_name,impressions,clicks,cost_micros,conversions,conversion_value_usd
+2026-10-01,G101,Simulated Search,1200,48,62005000,5,125.50
+2026-10-02,G101,Simulated Search,1350,54,70500000,7,167.25
