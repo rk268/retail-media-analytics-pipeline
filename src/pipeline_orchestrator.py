@@ -15,6 +15,8 @@ import sys
 import time
 from typing import Callable, Sequence
 
+from src.pipeline_lock import PipelineAlreadyRunning, pipeline_lock
+
 
 STAGES = (
     "src/bronze_to_silver.py",
@@ -118,6 +120,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--timeout-seconds", type=float, default=900)
     parser.add_argument("--events", default="data/outputs/pipeline_events.jsonl")
     parser.add_argument("--spark-submit", default="spark-submit")
+    parser.add_argument("--lock-file", default="data/outputs/pipeline.lock")
     args = parser.parse_args(argv)
 
     commands = [
@@ -125,13 +128,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         [args.spark_submit, STAGES[1], "--input", args.silver, "--output", args.gold],
     ]
     try:
-        summary = run_pipeline(
-            commands,
-            retries=args.retries,
-            timeout_seconds=args.timeout_seconds,
-            event_file=args.events,
-        )
-    except (PipelineFailure, ValueError) as error:
+        with pipeline_lock(args.lock_file):
+            summary = run_pipeline(
+                commands,
+                retries=args.retries,
+                timeout_seconds=args.timeout_seconds,
+                event_file=args.events,
+            )
+    except (PipelineFailure, PipelineAlreadyRunning, ValueError) as error:
         print(f"Pipeline failed: {error}", file=sys.stderr)
         return 1
     print(json.dumps(summary, indent=2))
